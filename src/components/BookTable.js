@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import bookContext from "../context/book/bookContext";
 import { TableBody } from "./TableBody";
 
 export const BookTable = () => {
+  const { books } = useContext(bookContext);
   return (
     <table className="u-full-width">
       <thead>
@@ -12,7 +14,9 @@ export const BookTable = () => {
           <th></th>
         </tr>
       </thead>
-      <TableBody />
+      {books.map((book) => (
+        <TableBody book={book} key={book.id} />
+      ))}
     </table>
   );
 };
