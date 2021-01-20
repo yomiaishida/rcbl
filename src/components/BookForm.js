@@ -1,12 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import bookContext from "../context/book/bookContext";
 
 export const BookForm = () => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [isbn, setIsbn] = useState(0);
 
+  const { addBook } = useContext(bookContext);
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    const newBook = {
+      id: isbn,
+      title,
+      author,
+    };
+
+    addBook(newBook);
+    setTitle("");
+    setAuthor("");
+    setIsbn(0);
+  };
+
   return (
-    <form>
+    <form onSubmit={onSubmit}>
       <div>
         <label htmlFor="title">Title</label>
         <input

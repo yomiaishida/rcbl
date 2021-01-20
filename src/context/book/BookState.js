@@ -11,6 +11,12 @@ const BookState = ({ children }) => {
   const [state, dispatch] = useReducer(BookReducer, initialState);
 
   // Add Book
+  function addBook(book) {
+    dispatch({
+      type: ADD_BOOK,
+      payload: book,
+    });
+  }
 
   // Remove Book
 
@@ -18,6 +24,7 @@ const BookState = ({ children }) => {
     <BookContext.Provider
       value={{
         books: state.books,
+        addBook,
       }}
     >
       {children}
