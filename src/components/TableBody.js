@@ -1,16 +1,21 @@
 import React, { useContext } from "react";
+import bookContext from "../context/book/bookContext";
 
 export const TableBody = ({ book }) => {
+  const { removeBook } = useContext(bookContext);
+
   return (
     <tbody>
-      <td>{book.title}</td>
-      <td>{book.author}</td>
-      <td>{book.id}</td>
-      <td>
-        <a href="#" class="delete">
-          X
-        </a>
-      </td>
+      <tr>
+        <td>{book.title}</td>
+        <td>{book.author}</td>
+        <td>{book.id}</td>
+        <td>
+          <a href="#" className="delete" onClick={() => removeBook(book.id)}>
+            X
+          </a>
+        </td>
+      </tr>
     </tbody>
   );
 };

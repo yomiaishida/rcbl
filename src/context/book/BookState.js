@@ -1,7 +1,7 @@
 import React, { useReducer } from "react";
 import BookContext from "./bookContext";
 import BookReducer from "./bookReducer";
-import { ADD_BOOK } from "../types";
+import { ADD_BOOK, REMOVE_BOOK } from "../types";
 
 const BookState = ({ children }) => {
   const initialState = {
@@ -19,12 +19,19 @@ const BookState = ({ children }) => {
   }
 
   // Remove Book
+  function removeBook(id) {
+    dispatch({
+      type: REMOVE_BOOK,
+      payload: id,
+    });
+  }
 
   return (
     <BookContext.Provider
       value={{
         books: state.books,
         addBook,
+        removeBook,
       }}
     >
       {children}

@@ -4,23 +4,38 @@ import bookContext from "../context/book/bookContext";
 export const BookForm = () => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
-  const [isbn, setIsbn] = useState(0);
+  const [isbn, setIsbn] = useState("");
 
   const { addBook } = useContext(bookContext);
 
   const onSubmit = (e) => {
     e.preventDefault();
 
-    const newBook = {
-      id: isbn,
-      title,
-      author,
-    };
+    if (title === "" || author === "" || isbn === "") {
+      alert("error");
+      // ui.showAlert("Please fill in all fields", "error");
+    } else {
+      // Add book to list
+      const newBook = {
+        id: isbn,
+        title,
+        author,
+      };
+      // ui.addBookToList(book);
 
-    addBook(newBook);
-    setTitle("");
-    setAuthor("");
-    setIsbn(0);
+      // Add to Ls
+      // Store.addBook(book);
+
+      // Show Success
+      // ui.showAlert("Book Added!", "success");
+
+      // Clear fields
+      // ui.clearFields();
+      addBook(newBook);
+      setTitle("");
+      setAuthor("");
+      setIsbn("");
+    }
   };
 
   return (
