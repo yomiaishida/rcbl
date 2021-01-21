@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import AlertContext from "../context/alert/alertContext";
 import bookContext from "../context/book/bookContext";
 
 export const BookForm = () => {
@@ -6,14 +7,16 @@ export const BookForm = () => {
   const [author, setAuthor] = useState("");
   const [isbn, setIsbn] = useState("");
 
+  const alertContext = useContext(AlertContext);
+  const { setAlert } = alertContext;
+
   const { addBook } = useContext(bookContext);
 
   const onSubmit = (e) => {
     e.preventDefault();
 
     if (title === "" || author === "" || isbn === "") {
-      alert("error");
-      // ui.showAlert("Please fill in all fields", "error");
+      setAlert("Please fill in all fields", "error");
     } else {
       // Add book to list
       const newBook = {
@@ -27,7 +30,7 @@ export const BookForm = () => {
       // Store.addBook(book);
 
       // Show Success
-      // ui.showAlert("Book Added!", "success");
+      setAlert("Book Added!", "success");
 
       // Clear fields
       // ui.clearFields();
