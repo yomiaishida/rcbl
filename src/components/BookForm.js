@@ -36,6 +36,7 @@ export const BookForm = () => {
 
   useEffect(() => {
     displayBooks();
+    // eslint-disable-next-line
   }, []);
 
   const addBookToLs = (book) => {
