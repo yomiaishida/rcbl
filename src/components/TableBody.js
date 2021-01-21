@@ -4,6 +4,7 @@ import bookContext from "../context/book/bookContext";
 export const TableBody = ({ book }) => {
   const { removeBook } = useContext(bookContext);
 
+    books.forEach(function (book, index) {
   return (
     <tbody>
       <tr>

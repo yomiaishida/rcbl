@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import AlertContext from "../context/alert/alertContext";
 import bookContext from "../context/book/bookContext";
 
@@ -12,6 +12,40 @@ export const BookForm = () => {
 
   const { addBook } = useContext(bookContext);
 
+  const getBooks = () => {
+    let books;
+    if (localStorage.getItem("books") === null) {
+      books = [];
+    } else {
+      books = JSON.parse(localStorage.getItem("books"));
+    }
+
+    return books;
+  };
+
+  const displayBooks = () => {
+    const books = getBooks();
+
+    books.forEach(function (book) {
+      // const ui = new UI();
+
+      // Add book to UI
+      addBook(book);
+    });
+  };
+
+  useEffect(() => {
+    displayBooks();
+  }, []);
+
+  const addBookToLs = (book) => {
+    const books = getBooks();
+
+    books.push(book);
+
+    localStorage.setItem("books", JSON.stringify(books));
+  };
+
   const onSubmit = (e) => {
     e.preventDefault();
 
@@ -24,17 +58,15 @@ export const BookForm = () => {
         title,
         author,
       };
-      // ui.addBookToList(book);
+      addBook(newBook);
 
       // Add to Ls
-      // Store.addBook(book);
+      addBookToLs(newBook);
 
       // Show Success
       setAlert("Book Added!", "success");
 
       // Clear fields
-      // ui.clearFields();
-      addBook(newBook);
       setTitle("");
       setAuthor("");
       setIsbn("");

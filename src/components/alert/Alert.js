@@ -8,7 +8,7 @@ const Alert = () => {
   return (
     alert !== null && (
       <div className={alert.type}>
-        <p>{alert.msg}</p>
+        <>{alert.msg}</>
       </div>
     )
   );
